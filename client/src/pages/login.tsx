@@ -114,13 +114,13 @@ export default function LoginPage() {
         </div>
 
         {/* Product Showcase */}
-        <div className="relative mb-8">
+        {/* <div className="relative mb-8">
           <img
             src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=200"
             alt="L'Oréal Glycolic Gloss product range"
             className="w-full h-32 object-cover rounded-xl"
           />
-        </div>
+        </div> */}
       </div>
 
       {/* Login Form */}
