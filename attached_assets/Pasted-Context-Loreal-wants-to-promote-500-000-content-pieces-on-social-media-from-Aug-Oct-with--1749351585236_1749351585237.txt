@@ -1,0 +1,203 @@
+Context: 
+        Loreal wants to promote 500,000+ content pieces on social media from Aug–Oct with focus on "Glossy Transition" from dull to shiny hair by Glycolic Gloss range of hair care products. Loreal has onboarded Alia Bhat as main star of the campaign.
+Objective:
+        Get expression of interest from 5 Lacs+ nano and micro creators/ consumers through landing page
+Features: 
+1. Mobile OTP based login
+2. OTP verification
+3. Social handle confirmation through social auth/ any other method
+4. Social handle validation (>500 Followers, Female, > 6% Engagement rate)
+5. Browse inspirational content
+6. Upload live content URL
+7. Live content URL validation
+8. Claim voucher/ product
+9. Capture Location in case of product
+10. Product dispatch tracking
+
+Product Requirements Document (PRD):
+
+L'Oréal "Glossy Transition" Creator Campaign Platform
+ 
+1. Executive Summary
+1.1 Project Overview
+L'Oréal aims to promote 500,000+ content pieces showcasing the "Glossy Transition" from dull to shiny hair using their Glycolic Gloss range, featuring Alia Bhatt as the campaign ambassador. The platform will facilitate nano and micro-creator acquisition, content validation, and product fulfillment across India.
+1.2 Business Objectives
+Primary: Acquire 5+ lakh creator/consumer registrations
+Secondary: Generate 1+ lakh pieces of original content (20% conversion rate)
+Tertiary: Achieve positive sentiment across campaign content
+ 
+1.3 Campaign Timeline
+Duration: August - October 2024
+Voucher Redemption: 7 days post-campaign
+ 
+2. Target Audience & Market Context
+2.1 Primary Audience
+ 
+Nano Creators: 500-10K followers
+Micro Creators: 10K-100K followers
+Demographics: Female, 18-35 years, India-based
+Engagement: >6% engagement rate, public accounts only
+ 
+2.2 Indian Market Considerations
+ 
+Mobile-First: 95% mobile usage for social media
+Regional Diversity: Multi-language content support
+Trust Factors: Celebrity endorsement (Alia Bhatt) crucial for credibility
+Delivery Infrastructure: Pan-India fulfillment capabilities
+ 
+ 
+3. Product Features & User Journey
+3.1 Core User Flow
+Registration → Validation → Content Creation → Reward Claiming → Fulfillment
+3.2 Detailed Feature Requirements
+3.2.1 User Registration & Authentication
+Feature: Mobile OTP-based Login
+ 
+Requirement: Indian mobile number (+91) validation
+OTP Service: Integration with reliable SMS gateway (MSG91/Textlocal)
+Session Management: 24-hour session validity
+Security: Rate limiting (max 3 OTP attempts per hour)
+ 
+Feature: OTP Verification
+ 
+Timeout: 5-minute OTP validity
+Retry Logic: Maximum 3 attempts before lockout
+Fallback: Alternative verification via WhatsApp OTP
+ 
+3.2.2 Social Media Integration & Validation
+Feature: Social Handle Confirmation
+ 
+Platforms: Instagram, YouTube, Facebook, Twitter
+Method: OAuth 2.0 integration with platform APIs
+Data Capture: Handle, follower count, engagement metrics
+Privacy: Minimal data extraction (public profile only)
+ 
+Feature: Advanced Social Validation
+ 
+Follower Criteria: >500 followers (excluding fake/bot accounts)
+Gender Validation: Profile analysis + manual flag option
+Engagement Rate: >6% calculated over last 30 posts
+Account Type: Public accounts only
+Bot Detection: Integration with third-party tools (HypeAuditor API)
+ 
+3.2.3 Content Discovery & Inspiration
+Feature: Browse Inspirational Content
+ 
+Alia Bhatt Content: Featured campaign videos and images
+Creator Galleries: Curated transformation examples
+Trend Insights: Popular hashtags and styling tips
+Tutorial Section: Step-by-step Glycolic Gloss usage guides
+ 
+3.2.4 Content Submission & Validation
+Feature: Upload Live Content URL
+ 
+Supported Formats: Instagram posts/reels, YouTube videos, Facebook posts
+URL Validation: Platform-specific URL structure verification
+Content Fetching: Automated content preview generation
+Duplicate Prevention: Hash-based content deduplication
+ 
+Feature: Live Content URL Validation
+ 
+Content Analysis: AI-powered product mention detection
+Hashtag Verification: Mandatory campaign hashtags (#GlossyTransition, #LorealIndia)
+Quality Checks: Minimum resolution, duration requirements
+Compliance: ASCI disclosure requirement validation
+ 
+3.2.5 Rewards & Fulfillment
+Feature: Claim Voucher/Product
+ 
+Reward: 3-item Glycolic Gloss pack (₹500 value)
+Inventory Management: Real-time stock tracking
+Waitlist System: Post 2L claims, automatic waitlist enrollment
+Claiming Window: 7-day redemption period
+ 
+Feature: Location Capture & Dispatch
+ 
+Address Validation: Pin code serviceability check
+Logistics Integration: Delhivery/Blue Dart API integration
+Tracking: Real-time shipment status updates
+Communication: SMS/WhatsApp delivery notifications
+ 
+ 
+4. Technical Architecture
+4.1 Platform Stack
+ 
+Frontend: React Native (mobile-first PWA)
+Backend: Node.js with Express.js
+Database: MongoDB with Redis caching
+Cloud: AWS (EC2, S3, RDS)
+CDN: CloudFront for media delivery
+ 
+4.2 Third-Party Integrations
+ 
+SMS Gateway: MSG91/Textlocal
+Social APIs: Instagram Basic Display, YouTube Data API, Facebook Graph API
+Bot Detection: HypeAuditor/Modash API
+Logistics: Delhivery/Blue Dart API
+Analytics: Google Analytics, Mixpanel
+Error Tracking: Sentry
+ 
+4.3 Security & Compliance
+ 
+Data Protection: GDPR compliance framework
+API Security: Rate limiting, JWT authentication
+Content Security: HTTPS enforcement, CSP headers
+Privacy: Data minimization, user consent management
+ 
+ 
+5. User Experience Design
+5.1 Mobile-First Design Principles
+ 
+Thumb-Friendly: Navigation optimized for one-handed use
+Quick Actions: Swipe gestures for common actions
+Offline Support: Basic functionality without internet
+Progressive Loading: Skeleton screens for better perceived performance
+ 
+5.2 Localization Strategy
+ 
+Languages: Hindi, English (primary), Tamil, Telugu, Bengali
+Cultural Adaptation: Region-specific beauty standards and preferences
+Currency: INR throughout the platform
+Date/Time: IST with regional format preferences
+ 
+ 
+6. Success Metrics & KPIs
+6.1 Primary Metrics
+ 
+Registration Rate: Target 5L+ unique registrations
+Conversion Rate: 20% registration to content creation
+Content Quality: >80% content meeting validation criteria
+Fulfillment Success: >95% successful product deliveries
+ 
+6.2 Secondary Metrics
+ 
+Engagement Metrics: Average session duration, page views
+Social Metrics: Hashtag reach, brand mention sentiment
+Technical Metrics: App performance, API response times
+User Satisfaction: NPS score, support ticket volume
+ 
+6.3 Success Criteria
+ 
+Quantitative: 5L+ registrations, 1L+ content pieces, 2L+ product claims
+Qualitative: Positive sentiment analysis, brand recall improvement
+Technical: 99.5% uptime, <2s page load times
+ 
+ 
+7. Risk Assessment & Mitigation
+7.1 Technical Risks
+ 
+API Rate Limits: Implement intelligent caching and request batching
+Server Overload: Auto-scaling infrastructure, load balancing
+Data Breach: End-to-end encryption, regular security audits
+ 
+7.2 Business Risks
+ 
+Low Conversion: A/B testing for optimization, incentive adjustments
+Fake Accounts: Advanced bot detection, manual review for high-value claims
+Inventory Shortage: Real-time inventory tracking, transparent waitlist management
+ 
+7.3 Legal & Compliance Risks
+ 
+ASCI Violations: Automated compliance checking, creator education
+Data Privacy: GDPR compliance audit, user consent optimization
+Platform ToS: Regular review of social platform policy changes
