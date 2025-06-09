@@ -1,4 +1,8 @@
-import dotenv from 'dotenv';
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+import * as path from "path";
+
+import dotenv from "dotenv";
 dotenv.config();
 
 import express, { type Request, Response, NextFunction } from "express";
@@ -6,8 +10,11 @@ import session from "express-session";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 // Extend Express Request interface for sessions
-declare module 'express-session' {
+declare module "express-session" {
   interface SessionData {
     userId?: number;
   }
@@ -18,16 +25,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Configure session middleware
-app.use(session({
-  secret: 'loreal-glycolic-gloss-campaign-secret-key',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: false, // Set to true in production with HTTPS
-    httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000, // 24 hours
-  },
-}));
+app.use(
+  session({
+    secret: "loreal-glycolic-gloss-campaign-secret-key",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: false, // Set to true in production with HTTPS
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    },
+  })
+);
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -73,21 +82,35 @@ app.use((req, res, next) => {
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
+  if (process.env.NODE_ENV === "production") {
+    // Serve static files using the new path resolution
+    app.use(express.static(path.join(__dirname, "../../app/client/dist")));
+
+    // Handle SPA routing
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(__dirname, "../../app/client/dist/index.html"));
+    });
   }
+
+  // For development on local
+  // if (app.get("env") === "development") {
+  //   await setupVite(app, server);
+  // } else {
+  //   serveStatic(app);
+  // }
 
   // ALWAYS serve the app on port 5000
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = 5000;
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
-    log(`serving on port ${port}`);
-  });
+  server.listen(
+    {
+      port,
+      host: "0.0.0.0",
+      reusePort: true,
+    },
+    () => {
+      log(`serving on port ${port}`);
+    }
+  );
 })();

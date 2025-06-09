@@ -155,7 +155,7 @@ export default function DashboardPage() {
 
       {/* Stats Cards */}
       <div className="p-4 space-y-4">
-        <div className="grid grid-cols-2 gap-4">
+        {/* <div className="grid grid-cols-2 gap-4">
           <Card>
             <CardContent className="p-4">
               <div className="text-2xl font-bold text-primary">
@@ -172,7 +172,7 @@ export default function DashboardPage() {
               <div className="text-sm text-gray-600">Engagement</div>
             </CardContent>
           </Card>
-        </div>
+        </div> */}
 
         {/* Campaign Status */}
         <Card className="bg-gradient-to-r from-primary to-pink-500 text-white">

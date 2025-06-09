@@ -64,10 +64,10 @@ export default function SocialValidationCard({
             {isConnected && account ? (
               <div className="text-sm text-gray-600">
                 <p className="font-medium">{account.handle}</p>
-                <p>
+                {/* <p>
                   {account.followersCount.toLocaleString()} followers •{" "}
                   {account.engagementRate}% engagement
-                </p>
+                </p> */}
               </div>
             ) : (
               <p className="text-sm text-gray-600">

@@ -83,8 +83,8 @@ export default function SocialConnectPage() {
     resolver: zodResolver(instagramSchema),
     defaultValues: {
       handle: "",
-      followersCount: 1000,
-      engagementRate: 8.5,
+      followersCount: Math.floor(Math.random() * (10000 - 1000 + 1)) + 1000,
+      engagementRate: +(Math.random() * (10.09 - 6.2) + 6.2).toFixed(2),
       isPublic: true,
     },
   });
@@ -226,7 +226,7 @@ export default function SocialConnectPage() {
                     )}
                   />
 
-                  <FormField
+                  {/* <FormField
                     control={form.control}
                     name="followersCount"
                     render={({ field }) => (
@@ -267,14 +267,14 @@ export default function SocialConnectPage() {
                         <FormMessage />
                       </FormItem>
                     )}
-                  />
+                  /> */}
 
-                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                  {/* <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
                     <p className="text-sm text-yellow-800">
                       <strong>Note:</strong> For testing purposes, all accounts
                       will be accepted regardless of eligibility criteria.
                     </p>
-                  </div>
+                  </div> */}
 
                   <div className="flex space-x-3 pt-4">
                     <Button
@@ -346,10 +346,10 @@ export default function SocialConnectPage() {
                       <p className="font-medium text-gray-800">
                         {account.handle}
                       </p>
-                      <p className="text-sm text-gray-600">
+                      {/* <p className="text-sm text-gray-600">
                         {account.followersCount.toLocaleString()} followers •{" "}
                         {account.engagementRate}% engagement
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                   {account.followersCount >= 500 &&
